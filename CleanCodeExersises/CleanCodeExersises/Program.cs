@@ -62,10 +62,9 @@ namespace CleanCodeExersises
         /*
          * Solution to Be positive exersise
          */
-        bool userActive = true;
-        public bool IsLoggedInClean(bool isNotloggedIn)
+        public bool IsLoggedInClean(bool userLoggedIn)
         {
-            if (!isNotloggedIn == userActive)
+            if (userLoggedIn)
             {
                 System.Console.WriteLine("Succesfully logged in.");
                 return true;
