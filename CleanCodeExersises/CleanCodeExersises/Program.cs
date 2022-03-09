@@ -136,6 +136,8 @@ namespace CleanCodeExersises
         const double unPreparedPrice = 350.00;
         public double GetPriceClean(bool isPreordered)
         {
+
+            //USE TENRIES!!!
             if (isPreordered == prepared)
             {
                 return preparedPrice;

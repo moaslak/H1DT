@@ -180,63 +180,65 @@ namespace GPOpgaver
             char[] chars = txt.ToCharArray();
 
             List<string> strings = new List<string>();
-            List<string> numbers = new List<string>();
-            string num2String = "";
-            string stringBuilder = "";
+            List<int> numbers = new List<int>();
+            List<string> numbersAsString = new List<string>();
             int zeroPad = 0;
-            bool padding = true;
-            for (int i = 0; i < chars.Length; i++)
+            int incNumber = 0;
+            bool paddingDone = false;
+            string num2String = "";
+
+            for(int i = 0; i < chars.Length; i++)
             {
-                if (Char.IsDigit(chars[i]))
-                {
-                    numbers.Add(chars[i].ToString());   
-                }
-                else
+                if (Char.IsLetter(chars[i]))
                 {
                     strings.Add(chars[i].ToString());
                 }
-                    
+                else
+                {
+                    if(chars[i] == '0' && !paddingDone)
+                    {
+                        numbersAsString.Add(chars[i].ToString());
+                        zeroPad++;
+                    }
+                    else
+                    {
+                        numbersAsString.Add(chars[i].ToString());
+                        paddingDone = true;
+                    }
+                }
             }
-            //zero padding
-            for(int i = 0; i < numbers.Count; i++)
+            for(int i = 0; i < numbersAsString.Count; i++)
             {
-                if (numbers[i] != "0")
-                {
-                    padding = false;
-                    break;
-                }
-                if (numbers[i] == "0" && padding == true)
-                {
-                    zeroPad++;
-                }
+                numbers.Add(Convert.ToInt32(numbersAsString[i]));
             }
-            //String builders
+            if (numbers.Count == 0)
+                incNumber = 1;
             if(numbers.Count > 0)
             {
-                for (int i = 0; i < numbers.Count; i++)
+                for(int i = 0; i < numbers.Count; i++)
                 {
-                    num2String = num2String + numbers[i];
+                    incNumber = (incNumber * 10) + numbers[i];
                 }
-                int buffer = Convert.ToInt32(num2String) + 1;
-                num2String = buffer.ToString();
-                if (zeroPad > 0)
-                    num2String = num2String.PadLeft(num2String.Length + zeroPad, '0');                
-            }
-            if(strings.Count > 0)
-            {
-                for (int j = 0; j < strings.Count; j++)
-                {
-                    stringBuilder = stringBuilder + strings[j];
-                }
-            }
-            if(numbers.Count == 0)
-            {
-                num2String = "1";
+                incNumber++;
             }
             
-                       
-            stringBuilder = stringBuilder + num2String;
-            return stringBuilder;
+            //string builder
+            for (int i = 0; i < strings.Count; i++)
+            {
+                num2String = num2String + strings[i];
+            }
+            if (num2String.Length == numbers.Count)
+                zeroPad--;
+            if(zeroPad != 0)
+            {
+                for (int i = 0; i < zeroPad; i++)
+                {
+                    num2String = num2String + "0";
+                }
+            }
+            num2String = num2String + incNumber.ToString();
+
+            return num2String;
         }
         /*
          * Exercise 10.
