@@ -7,7 +7,7 @@ namespace listClassFromScratch
         static listClass listArray = new listClass();
         static int removeAt = 1;
         static int getAt = 2;
-        static string contain = "1";
+        static string contain = "8";
         /// <summary>
         /// Test programme for the listClass class. Input is MUST be converted to strings. 
         /// Functions are getSize(), addToList(), removeAt(), contains(),   
@@ -18,14 +18,12 @@ namespace listClassFromScratch
         {
             //Create test data
             Console.WriteLine("Create test data");
-            string[] array = listArray.createArray(0);
-            array = listArray.addToList(array, "1");
-            array = listArray.addToList(array, "2");
-            array = listArray.addToList(array, "1");
-            array = listArray.addToList(array, "3");
-            array = listArray.addToList(array, "1");
-            array = listArray.addToList(array, "4");
-            array = listArray.addToList(array, "1");
+            string[] array = listArray.createArray(5);
+            array[0] = "1";
+            array[1] = "2";
+            array[2] = "3";
+            array[3] = "4";
+            array[4] = "1";
             //array = listArray.addToList(array, "john");
             Console.WriteLine("Testdata: ");
             foreach (string s in array)
@@ -47,6 +45,7 @@ namespace listClassFromScratch
             //Add
             Console.WriteLine();
             Console.WriteLine("Add");
+            Console.WriteLine("Adds " + contain);
             foreach(string s in listArray.addToList(listArray.intArray2String(arrayOfInts), contain))
                 Console.WriteLine(s);
             
