@@ -211,6 +211,7 @@ namespace GPOpgaver
             {
                 numbers.Add(Convert.ToInt32(numbersAsString[i]));
             }
+            
             if (numbers.Count == 0)
                 incNumber = 1;
             if(numbers.Count > 0)
@@ -227,15 +228,19 @@ namespace GPOpgaver
             {
                 num2String = num2String + strings[i];
             }
-            if (num2String.Length == numbers.Count)
+            if (incNumber.ToString().Length == numbers.Count)
                 zeroPad--;
-            if(zeroPad != 0)
+
+            if (zeroPad > 0)
             {
+
                 for (int i = 0; i < zeroPad; i++)
                 {
                     num2String = num2String + "0";
                 }
+                
             }
+            
             num2String = num2String + incNumber.ToString();
 
             return num2String;
