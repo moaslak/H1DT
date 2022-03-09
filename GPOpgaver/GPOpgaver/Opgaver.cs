@@ -89,18 +89,20 @@ namespace GPOpgaver
 
             while (!(integerArray[arrayStart] == searchFor || integerArray[arrayEnd] == searchFor))
             {
+                
                 avg = (arrayEnd + arrayStart) / 2;
-                if (searchFor <= avg)
+                if(integerArray[avg] == searchFor)
                 {
-                    arrayEnd = avg;
+                    return steps;
+                }
+                else if (searchFor < integerArray[avg])
+                { 
+                    arrayEnd = avg-1;
                 }
                 else
-                    arrayStart = avg;
+                    arrayStart = avg + 1;
                 steps++;
             }
-
-            
-            
             return steps;
         }
         /*
@@ -178,46 +180,61 @@ namespace GPOpgaver
             char[] chars = txt.ToCharArray();
 
             List<string> strings = new List<string>();
-            List<int> numbers = new List<int>();
-            int int2Add;
+            List<string> numbers = new List<string>();
             string num2String = "";
+            string stringBuilder = "";
+            int zeroPad = 0;
+            bool padding = true;
             for (int i = 0; i < chars.Length; i++)
             {
-                if (Int32.TryParse(chars[i].ToString(), out int2Add))
+                if (Char.IsDigit(chars[i]))
                 {
-                    
-                    numbers.Add(int2Add);
+                    numbers.Add(chars[i].ToString());   
                 }
                 else
+                {
                     strings.Add(chars[i].ToString());
+                }
+                    
             }
-
+            //zero padding
+            for(int i = 0; i < numbers.Count; i++)
+            {
+                if (numbers[i] != "0")
+                {
+                    padding = false;
+                    break;
+                }
+                if (numbers[i] == "0" && padding == true)
+                {
+                    zeroPad++;
+                }
+            }
+            //String builders
+            if(numbers.Count > 0)
+            {
+                for (int i = 0; i < numbers.Count; i++)
+                {
+                    num2String = num2String + numbers[i];
+                }
+                int buffer = Convert.ToInt32(num2String) + 1;
+                num2String = buffer.ToString();
+                if (zeroPad > 0)
+                    num2String = num2String.PadLeft(num2String.Length + zeroPad, '0');                
+            }
+            if(strings.Count > 0)
+            {
+                for (int j = 0; j < strings.Count; j++)
+                {
+                    stringBuilder = stringBuilder + strings[j];
+                }
+            }
             if(numbers.Count == 0)
             {
                 num2String = "1";
             }
-            else
-            {
-                if (numbers[numbers.Count - 1] == 0)
-                {
-                    int buffer = Convert.ToInt32(num2String);
-                    buffer = buffer + 1;
-                    num2String = "0" + buffer.ToString();
-                }
-                else
-                {
-                    int buffer = Convert.ToInt32(num2String);
-                    buffer = buffer + 1;
-                    num2String = buffer.ToString();
-                }
-            }
+            
                        
-           
-            string stringBuilder = "";
-            for(int k = 0; k < strings.Count; k++)
-            {
-                stringBuilder = stringBuilder + strings[k];
-            }
             stringBuilder = stringBuilder + num2String;
             return stringBuilder;
         }
@@ -251,24 +268,28 @@ namespace GPOpgaver
             
             for(int i = 0; i < chars.Length; i++)
             {
-                if (Char.IsUpper(chars[i]))
+                if (Char.IsUpper(chars[i]) && !upperOk)
                 {
                     upperOk = true;
+
                 }
-                if (Char.IsLower(chars[i]))
+                if (Char.IsLower(chars[i]) && !lowerOk)
                 {
                     lowerOk = true;
                 }
-                if (Char.IsDigit(chars[i]))
+                if (Char.IsDigit(chars[i]) && !digitOk)
                 {
                     digitOk = true;
                 }
-                if(!(Char.IsLetter(chars[i])))
+                if(!(Char.IsLetter(chars[i])) && !specialCharacterOk)
                 {
                     foreach(char c in specialCharacters)
                     {
                         if (chars[i] == c)
+                        {
                             specialCharacterOk = true;
+                        }
+                            
                     }
                 }
             }
