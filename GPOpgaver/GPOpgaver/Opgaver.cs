@@ -89,18 +89,20 @@ namespace GPOpgaver
 
             while (!(integerArray[arrayStart] == searchFor || integerArray[arrayEnd] == searchFor))
             {
+                
                 avg = (arrayEnd + arrayStart) / 2;
-                if (searchFor <= avg)
+                if(integerArray[avg] == searchFor)
                 {
-                    arrayEnd = avg;
+                    return steps;
+                }
+                else if (searchFor < integerArray[avg])
+                { 
+                    arrayEnd = avg-1;
                 }
                 else
-                    arrayStart = avg;
+                    arrayStart = avg + 1;
                 steps++;
             }
-
-            
-            
             return steps;
         }
         /*
@@ -237,7 +239,6 @@ namespace GPOpgaver
             num2String = num2String + incNumber.ToString();
 
             return num2String;
-            
         }
         /*
          * Exercise 10.
@@ -269,24 +270,28 @@ namespace GPOpgaver
             
             for(int i = 0; i < chars.Length; i++)
             {
-                if (Char.IsUpper(chars[i]))
+                if (Char.IsUpper(chars[i]) && !upperOk)
                 {
                     upperOk = true;
+
                 }
-                if (Char.IsLower(chars[i]))
+                if (Char.IsLower(chars[i]) && !lowerOk)
                 {
                     lowerOk = true;
                 }
-                if (Char.IsDigit(chars[i]))
+                if (Char.IsDigit(chars[i]) && !digitOk)
                 {
                     digitOk = true;
                 }
-                if(!(Char.IsLetter(chars[i])))
+                if(!(Char.IsLetter(chars[i])) && !specialCharacterOk)
                 {
                     foreach(char c in specialCharacters)
                     {
                         if (chars[i] == c)
+                        {
                             specialCharacterOk = true;
+                        }
+                            
                     }
                 }
             }
