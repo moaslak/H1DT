@@ -227,7 +227,7 @@ namespace GPOpgaver
             {
                 num2String = num2String + strings[i];
             }
-            if (num2String.Length == numbers.Count)
+            if (incNumber.ToString().Length == numbers.Count)
                 zeroPad--;
             if(zeroPad != 0)
             {
