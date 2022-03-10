@@ -34,14 +34,7 @@ namespace CleanCodeExersises
         const int legalDrivingAge = 21;
         public bool IsLegalDrikingAgeClean(int age)
         {
-            if (age > legalDrivingAge)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return age > legalDrivingAge;
         }
         /*
          * Be positive exersise
@@ -101,16 +94,9 @@ namespace CleanCodeExersises
         const bool retired = true;
         public bool eligibleClean(Employee employee)
         {
-            if (employee.Age > retiringSoon
+            return (employee.Age > retiringSoon
                 && employee.YearsEmployed > alumn
-                && employee.IsRetired == retired)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                && employee.IsRetired == retired);
         }
         
         /*
@@ -136,16 +122,7 @@ namespace CleanCodeExersises
         const double unPreparedPrice = 350.00;
         public double GetPriceClean(bool isPreordered)
         {
-
-            //USE TENRIES!!!
-            if (isPreordered == prepared)
-            {
-                return preparedPrice;
-            }
-            else
-            {
-                return unPreparedPrice;
-            }
+            return prepared ? preparedPrice : unPreparedPrice;
         }
         /*
          * Strong type exersise - not done
