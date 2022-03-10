@@ -1,2 +1,2 @@
 # H1DT
-hovedforløb
+Samling af projekter lavet til Hovedforløb 1
