@@ -116,13 +116,11 @@ namespace CleanCodeExersises
          * Solution to Ternary exersise
          * Use a oneline Ternary.
          */
-
-        bool prepared;
-        const double preparedPrice = 200.00;
-        const double unPreparedPrice = 350.00;
+        const double preOrderedPrice = 200.00;
+        const double notPreOrderedPrice = 350.00;
         public double GetPriceClean(bool isPreordered)
         {
-            return prepared ? preparedPrice : unPreparedPrice;
+            return isPreordered ? preOrderedPrice : notPreOrderedPrice;
         }
         /*
          * Strong type exersise - not done
