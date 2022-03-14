@@ -42,86 +42,7 @@ namespace sortingAlgos
             }
             return intArray;
         }
-        /// <summary>
-        /// Quicksort algorithm. Arguments, int array to sort. Start index and end index.
-        /// </summary>
-        /// <param name="intArray"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns>sorted int array</returns>
-        public int[] quickSort(int[] intArray, int start, int end)
-        {
-            int pivot;
-            if (start < end)
-            {
-                pivot = subArray(intArray, start, end);
-                if (pivot > 1)
-                {
-                    quickSort(intArray, start, pivot - 1);
-                }
-                if (pivot + 1 < end)
-                {
-                    quickSort(intArray, pivot + 1, end);
-                }
-            }
-            return intArray;
-        }
 
-        /// <summary>
-        /// Method for partitioning the array in quickSort(). Returns the pivot.
-        /// </summary>
-        /// <param name="intArray"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns>int</returns>
-        private int subArray(int[] intArray, int start, int end)
-        {
-            int pivot = intArray[end];
-
-            do
-            {
-                while (intArray[start] < pivot)
-                {
-                    start++;
-                }
-                while (intArray[end] > pivot)
-                {
-                    end--;
-                }
-                if (start < end)
-                {
-                    if (intArray[start] == intArray[end]) return end;
-                    
-                    int temp = intArray[end];
-                    intArray[end] = intArray[start];
-                    intArray[start] = temp;
-                }
-                else
-                {
-                    return end;
-                }
-            } while (true);
-        }
-
-        /*
-        public string[] quickSort(string[] stringArray, int start, int end)
-        {
-            int pivot;
-            if (start < end)
-            {
-                pivot = subArray(stringArray, start, end);
-                if (pivot > 1)
-                {
-                    quickSort(stringArray, start, pivot - 1);
-                }
-                if (pivot + 1 < end)
-                {
-                    quickSort(stringArray, pivot + 1, end);
-                }
-            }
-            return stringArray;
-        }
-        */
         public string[] bubbleSort(string[] Array)
         {
             for (int i = 0; i < Array.Length; i++)
@@ -138,15 +59,79 @@ namespace sortingAlgos
             }
             return Array;
         }
-        
 
-        private int string2IntValue(string s)
+        public int[] quickSort(int[] array, int start, int end)
         {
-            char[] chars = s.ToCharArray();
-            int output = 0;
-            foreach(char c in chars)
-                output = output + Convert.ToInt32(c);
-            return output;
+            int pivot;
+            
+            
+            if( start < end)
+            {
+                pivot = partition(array, start, end);
+            }
+
+            return array;
+        }
+
+        public string[] quickSort(string[] array, int start, int end)
+        {
+            string pivot;
+
+            if(start < end)
+            {
+                pivot = partition(array, start, end);
+            }
+            return array;
+        }
+
+        private string partition(string[] array, int start, int end)
+        {
+            string pivot = array[end];
+            int i = start - 1;
+
+            for(int j = start; j <= end - 1; j++)
+            {
+                if(array[j].CompareTo(pivot) < 0)
+                {
+                    i++;
+                    swap(array[i], array[j]);
+                }
+            }
+            swap(array[i + 1], array[end]);
+            return array[i + 1];
+        }
+
+        private int partition(int[] array, int start, int end)
+        {
+            int pivot = array[end];
+            int i = start - 1;
+            for (int j = start; j <= end - 1; j++)
+            {
+                // If current element is smaller than the pivot
+                if (array[j] < pivot)
+                {
+                    i++;    // increment index of smaller element
+                    swap(array[i], array[j]);
+                }
+            }
+            swap(array[i + 1], array[end]);
+            return (i + 1);
+        }
+
+
+
+        private void swap(int a, int b)
+        {
+            int buffer = b;
+            b = a;
+            a = buffer;
+        }
+
+        private void swap(string a, string b)
+        {
+            string buffer = b;
+            b = a;
+            a = buffer;
         }
     }
 }
