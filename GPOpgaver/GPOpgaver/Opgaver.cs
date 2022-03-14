@@ -258,7 +258,6 @@ namespace GPOpgaver
          */
         public static bool ValidatePassword(string password)
         {
-            bool strongPassword = false;
             const int minLength = 8;
             const int maxLength = 25;
             char[] chars = password.ToCharArray();
@@ -267,42 +266,40 @@ namespace GPOpgaver
             bool digitOk = false;
             bool specialCharacterOk = false;
             bool lengthOk = false;
-            string specialCharacters = @"!@#$%^&*()+=-{}[]:;'?<>,._" + '"';
-            if (password.Length < minLength || password.Length > maxLength)
+            string specialCharactersString = "!@#$%^&*()+=-{}[]:;'?<>,._'" + "'";
+            char[] specialCharacters = specialCharactersString.ToCharArray();
+            if (password.Length >= minLength && password.Length < maxLength)
             {
                 lengthOk = true;
             }
             
             for(int i = 0; i < chars.Length; i++)
             {
-                if (Char.IsUpper(chars[i]) && !upperOk)
+                if (Char.IsUpper(chars[i]))
                 {
                     upperOk = true;
 
                 }
-                if (Char.IsLower(chars[i]) && !lowerOk)
+                if (Char.IsLower(chars[i]))
                 {
                     lowerOk = true;
                 }
-                if (Char.IsDigit(chars[i]) && !digitOk)
+                if (Char.IsDigit(chars[i]))
                 {
                     digitOk = true;
                 }
-                if(!(Char.IsLetter(chars[i])) && !specialCharacterOk)
+                if(!(Char.IsLetter(chars[i])) && !(Char.IsDigit(chars[i])))
                 {
                     foreach(char c in specialCharacters)
                     {
                         if (chars[i] == c)
                         {
                             specialCharacterOk = true;
-                        }
-                            
+                        }     
                     }
                 }
             }
-            if(lengthOk && upperOk && lowerOk && digitOk && specialCharacterOk)
-                strongPassword = true;
-            return strongPassword;
+            return lengthOk && upperOk && lowerOk && digitOk && specialCharacterOk;
         }
     }
 }
