@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Text.RegularExpressions;
 
 namespace GPOpgaver
 {
@@ -145,8 +145,15 @@ namespace GPOpgaver
          */
         public static int PowerRanger(int power, int min, int max)
         {
-            throw new NotImplementedException();
-            //Write your solution here
+            int result = 0;
+            int numbers = 0;
+            for(int i = 0; i < power+1; i++)
+            {
+                result = Convert.ToInt32(Math.Pow(Convert.ToDouble(i), Convert.ToDouble(power)));
+                if (result >= min && result <= max)
+                    numbers++;
+            }
+            return numbers;
 
         }
         /*
@@ -253,7 +260,6 @@ namespace GPOpgaver
          */
         public static bool ValidatePassword(string password)
         {
-            bool strongPassword = false;
             const int minLength = 8;
             const int maxLength = 25;
             char[] chars = password.ToCharArray();
@@ -262,42 +268,47 @@ namespace GPOpgaver
             bool digitOk = false;
             bool specialCharacterOk = false;
             bool lengthOk = false;
-            string specialCharacters = @"!@#$%^&*()+=-{}[]:;'?<>,._" + '"';
-            if (password.Length < minLength || password.Length > maxLength)
+            bool letterOk = false;
+            string specialCharacters = "!@#$%^&*()+=-{}[]:;'?<>,._" + '"';
+            Regex reg = new Regex(@"^[a-zA-Z]+$");
+            if (password.Length >= minLength && password.Length < maxLength)
             {
                 lengthOk = true;
             }
-            
-            for(int i = 0; i < chars.Length; i++)
+            if (reg.IsMatch(password))
             {
-                if (Char.IsUpper(chars[i]) && !upperOk)
+                letterOk = true;
+            }
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (Char.IsUpper(chars[i]))
                 {
                     upperOk = true;
-
                 }
-                if (Char.IsLower(chars[i]) && !lowerOk)
+                if (Char.IsLower(chars[i]))
                 {
                     lowerOk = true;
                 }
-                if (Char.IsDigit(chars[i]) && !digitOk)
+                if (Char.IsDigit(chars[i]) )
                 {
                     digitOk = true;
                 }
-                if(!(Char.IsLetter(chars[i])) && !specialCharacterOk)
+                
+
+                if (!(Char.IsLetterOrDigit(chars[i])))
                 {
                     foreach(char c in specialCharacters)
                     {
-                        if (chars[i] == c)
+                        if((password.Contains(c)))
                         {
                             specialCharacterOk = true;
                         }
-                            
                     }
                 }
             }
-            if(lengthOk && upperOk && lowerOk && digitOk && specialCharacterOk)
-                strongPassword = true;
-            return strongPassword;
+
+            return lengthOk && upperOk && lowerOk && digitOk && specialCharacterOk && letterOk;
         }
     }
 }
