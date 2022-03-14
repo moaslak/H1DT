@@ -107,18 +107,15 @@ namespace sortingAlgos
             int i = start - 1;
             for (int j = start; j <= end - 1; j++)
             {
-                // If current element is smaller than the pivot
                 if (array[j] < pivot)
                 {
-                    i++;    // increment index of smaller element
+                    i++;
                     swap(array[i], array[j]);
                 }
             }
             swap(array[i + 1], array[end]);
             return (i + 1);
         }
-
-
 
         private void swap(int a, int b)
         {
