@@ -275,13 +275,17 @@ namespace GPOpgaver
             {
                 lengthOk = true;
             }
-            if (reg.IsMatch(password))
-            {
-                letterOk = true;
-            }
+            
 
             for (int i = 0; i < chars.Length; i++)
             {
+                if (Char.IsLetter(chars[i]))
+                {
+                    if(reg.IsMatch(chars[i].ToString()))
+                        letterOk = true;
+                    else
+                        lengthOk = false;
+                }
                 if (Char.IsUpper(chars[i]))
                 {
                     upperOk = true;
