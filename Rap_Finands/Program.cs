@@ -13,15 +13,16 @@ namespace Rap_Finands
     class Program
     {
         public static string reginummer = "4242";
-        public static string datafil = "bank.json"; //Her ligger alt data i
+        // korrekt sti til data
+        public static string datafil = "C:/Dropbox/TECHCOLLEGE/Hovedforløb_1/Repository/H1DT/Rap_Finands/bank.json"; //Her ligger alt data i
         public static List<Konto> konti;
-        public static float belob;
+        //public static float belob; // denne er overflødig
         static void Main(string[] args)
         {
             Console.WriteLine("Henter alt kontodata");
             
-            hent();
-            if (konti.Count == 0) {
+            konti = hent(datafil);
+            /*if (konti.Count == 0) {
                 var k = lavKonto();
                 k.ejer = "Ejvind Møller";
                 konti.Add(k);
@@ -32,24 +33,31 @@ namespace Rap_Finands
                 
                 gem();
             } else {
-            }
+            }*/ // data findes fra json. INGEN HARDCODED DATA.
             dos_start();
             
         }
         static void dos_start() {
             Console.WriteLine("Velkommen til Rap Finans af Konrad Sommer");
             Console.WriteLine("Hvad vil du gøre nu?");
-            
+
+            int valg;
             bool blivVedogved = true;
             while (blivVedogved) {
-                Console.WriteLine("1. Opret ny konto");
-                Console.WriteLine("2. Hæv/sæt ind");
-                Console.WriteLine("3. Se en oversigt");
-                Console.WriteLine("0. Afslut");
+                
+                // do while, for at undgå forkert bruger input.
+                do
+                {
+                    Console.WriteLine("1. Opret ny konto");
+                    Console.WriteLine("2. Hæv/sæt ind");
+                    Console.WriteLine("3. Se en oversigt");
+                    Console.WriteLine("0. Afslut");
+                    Console.Write(">");
 
-                Console.Write(">");
-                string valg1 = Console.ReadLine();
-                int valg = int.Parse(valg1+1);
+                } while (!(Int32.TryParse(Console.ReadLine(),out valg)));
+                
+                //string valg1 = Console.ReadLine();
+               // int valg = int.Parse(valg1); // +1 gør at man ikke vælger rigtigt i menuen
                 
                 switch (valg) {
                     case 1:
@@ -66,9 +74,8 @@ namespace Rap_Finands
                         break;
                     default:
                         Console.WriteLine("UGYLDIGT VALGT!!");
-                        Console.ReadKey();
+                        //Console.ReadKey(); // kan gøre at man vælger igen. Der er ingen, umiddelbar, grund til at holde en pause her
                         break;
-
                 }
             }
             Console.Clear();
@@ -152,7 +159,8 @@ namespace Rap_Finands
             if (saldo + beløb < 0) return false;
             var t = new Transaktion();
             t.tekst = tekst;
-            t.amount = belob;
+            //t.amount = belob; // der skal bruges argumentet
+            t.amount = beløb;
             t.saldo = t.amount + saldo;
             t.dato = DateTime.Now;
             
@@ -173,17 +181,21 @@ namespace Rap_Finands
         public static void gem() 
         {
             File.WriteAllText(datafil,JsonConvert.SerializeObject(konti));
-            File.Delete(datafil); //Fjern debug fil
+
+            // udkommenteres nedenstående, da kan data gemmes.
+            //File.Delete(datafil); //Fjern debug fil 
         }
-        public static void hent()
+        public static List<Konto> hent(string datafil)
         {
-            datafil = "debug_bank.json"; //Debug - brug en anden datafil til debug ~Konrad
+            // korret sti til json kommer fra argumentet
+            //datafil = "Debug_bank.json"; //Debug - brug en anden datafil til debug ~Konrad
             if (File.Exists(datafil)) {
                 string json = File.ReadAllText(datafil);
                 konti = JsonConvert.DeserializeObject<List<Konto>>(json);
             } else {
                 konti = new List<Konto>();
             }
+            return konti;
         }
     }
 }
