@@ -13,14 +13,15 @@ namespace Rap_Finands
     class Program
     {
         public static string reginummer = "4242";
-        public static string datafil = "bank.json"; //Her ligger alt data i
+        // korrekt sti til data
+        public static string datafil = "C:/Dropbox/TECHCOLLEGE/Hovedforløb_1/Repository/H1DT/Rap_Finands/bank.json"; //Her ligger alt data i
         public static List<Konto> konti;
         //public static float belob; // denne er overflødig
         static void Main(string[] args)
         {
             Console.WriteLine("Henter alt kontodata");
             
-            konti = hent();
+            konti = hent(datafil);
             if (konti.Count == 0) {
                 var k = lavKonto();
                 k.ejer = "Ejvind Møller";
@@ -178,10 +179,10 @@ namespace Rap_Finands
             // udkommenteres nedenstående, da kan data gemmes.
             //File.Delete(datafil); //Fjern debug fil 
         }
-        public static List<Konto> hent()
+        public static List<Konto> hent(string datafil)
         {
-            // korret sti til json
-            datafil = "C:/Dropbox/TECHCOLLEGE/Hovedforløb_1/Repository/H1DT/Rap_Finands/bank.json"; //Debug - brug en anden datafil til debug ~Konrad
+            // korret sti til json kommer fra argumentet
+            //datafil = "Debug_bank.json"; //Debug - brug en anden datafil til debug ~Konrad
             if (File.Exists(datafil)) {
                 string json = File.ReadAllText(datafil);
                 konti = JsonConvert.DeserializeObject<List<Konto>>(json);
