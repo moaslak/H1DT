@@ -14,11 +14,11 @@ namespace listClassTest
         {
             string checkTrue = "john";
             string checkFalse = "FALSE";
-            Assert.Equal(true, list.contains(array, checkTrue));
-            Assert.Equal(false, list.contains(array, checkFalse));
+            Assert.True(list.contains(array, checkTrue));
+            Assert.False(list.contains(array, checkFalse));
 
             checkTrue = "1";
-            Assert.Equal(true, list.contains(array, checkTrue));
+            Assert.True(list.contains(array, checkTrue));
         }
 
         [Fact]
