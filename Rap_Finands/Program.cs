@@ -175,7 +175,8 @@ namespace Rap_Finands
         {
             File.WriteAllText(datafil,JsonConvert.SerializeObject(konti));
 
-            File.Delete(datafil); //Fjern debug fil
+            // udkommenteres nedenstående, da kan data gemmes.
+            //File.Delete(datafil); //Fjern debug fil 
         }
         public static List<Konto> hent()
         {
