@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Text.RegularExpressions;
 
 namespace GPOpgaver
 {
@@ -145,8 +145,15 @@ namespace GPOpgaver
          */
         public static int PowerRanger(int power, int min, int max)
         {
-            throw new NotImplementedException();
-            //Write your solution here
+            int result = 0;
+            int numbers = 0;
+            for(int i = 0; i < power+1; i++)
+            {
+                result = Convert.ToInt32(Math.Pow(Convert.ToDouble(i), Convert.ToDouble(power)));
+                if (result >= min && result <= max)
+                    numbers++;
+            }
+            return numbers;
 
         }
         /*
@@ -266,40 +273,51 @@ namespace GPOpgaver
             bool digitOk = false;
             bool specialCharacterOk = false;
             bool lengthOk = false;
-            string specialCharactersString = "!@#$%^&*()+=-{}[]:;'?<>,._'" + "'";
-            char[] specialCharacters = specialCharactersString.ToCharArray();
+            bool letterOk = false;
+            string specialCharacters = "!@#$%^&*()+=-{}[]:;'?<>,._" + '"';
+            Regex reg = new Regex(@"^[a-zA-Z]+$");
             if (password.Length >= minLength && password.Length < maxLength)
             {
                 lengthOk = true;
             }
             
-            for(int i = 0; i < chars.Length; i++)
+
+            for (int i = 0; i < chars.Length; i++)
             {
+                if (Char.IsLetter(chars[i]))
+                {
+                    if(reg.IsMatch(chars[i].ToString()))
+                        letterOk = true;
+                    else
+                        lengthOk = false;
+                }
                 if (Char.IsUpper(chars[i]))
                 {
                     upperOk = true;
-
                 }
                 if (Char.IsLower(chars[i]))
                 {
                     lowerOk = true;
                 }
-                if (Char.IsDigit(chars[i]))
+                if (Char.IsDigit(chars[i]) )
                 {
                     digitOk = true;
                 }
-                if(!(Char.IsLetter(chars[i])) && !(Char.IsDigit(chars[i])))
+                
+
+                if (!(Char.IsLetterOrDigit(chars[i])))
                 {
                     foreach(char c in specialCharacters)
                     {
-                        if (chars[i] == c)
+                        if((password.Contains(c)))
                         {
                             specialCharacterOk = true;
-                        }     
+                        }
                     }
                 }
             }
-            return lengthOk && upperOk && lowerOk && digitOk && specialCharacterOk;
+
+            return lengthOk && upperOk && lowerOk && digitOk && specialCharacterOk && letterOk;
         }
     }
 }
