@@ -66,7 +66,7 @@ namespace Rap_Finands
                         break;
                     default:
                         Console.WriteLine("UGYLDIGT VALGT!!");
-                        Console.ReadKey();
+                        //Console.ReadKey(); // kan gøre at man vælger igen. Der er ingen, umiddelbar, grund til at holde en pause her
                         break;
 
                 }
