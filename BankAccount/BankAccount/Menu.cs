@@ -9,7 +9,7 @@ namespace BankAccount
     public class Menu
     {
         Account account = new Account();
-        
+
         public void mainMenu()
         {
             int mode = 0;
@@ -33,22 +33,31 @@ namespace BankAccount
                     account.getBalance();
                     break;
                 case 2:
-                    uint deposit;
+                    double deposit;
                     do
                     {
                         Console.Write("Enter value to deposit to account: ");
-                    } while (!(UInt32.TryParse(Console.ReadLine(), out deposit)));
+                    } while (!(double.TryParse(Console.ReadLine(), out deposit)));
                     account.deposit(deposit);
                     Console.WriteLine(deposit.ToString("C") + " insereted into account");
                     Console.WriteLine();
                     account.getBalance();
                     break;
                 case 3:
-                    uint withdraw;
+                    double withdraw = 0;
                     do
                     {
-                        Console.Write("Enter value to withdraw from account: ");
-                    } while (!(UInt32.TryParse(Console.ReadLine(), out withdraw)));
+                        if(withdraw < 0)
+                        {
+                            Console.WriteLine("You cannot withdraw a negative number");
+                        }
+                        do
+                        {
+                            Console.Write("Enter value to withdraw from account: ");
+                        } while (!(double.TryParse(Console.ReadLine(), out withdraw)));
+                    } while (withdraw < 0);
+                     
+                        
                     Console.WriteLine("Withdrawing " + withdraw.ToString("C") + " from account");
                     account.withdraw(withdraw);
                     

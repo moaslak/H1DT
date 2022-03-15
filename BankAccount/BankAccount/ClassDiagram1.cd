@@ -7,8 +7,8 @@
       <FileName>Account.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BankAccount.Program" Collapsed="true">
-    <Position X="5.5" Y="3.75" Width="1.5" />
+  <Class Name="BankAccount.Program">
+    <Position X="5.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BankAccount.Menu">
-    <Position X="2.5" Y="2.75" Width="1.5" />
+    <Position X="2" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAAAA=</HashCode>
       <FileName>Menu.cs</FileName>

@@ -4,8 +4,6 @@ namespace BankAccount
 {
     public class Program
     {
-         
-     
         public static void Main(string[] args)
         {
             Account account = new Account();

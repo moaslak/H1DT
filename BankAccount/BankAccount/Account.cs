@@ -22,7 +22,7 @@ namespace BankAccount
         public void withdraw(double withdraw)
         {
             double subWithdraw = this.balance - withdraw;
-
+            
             if(subWithdraw < 0)
             {
                 Console.WriteLine("Not enough money :(");
