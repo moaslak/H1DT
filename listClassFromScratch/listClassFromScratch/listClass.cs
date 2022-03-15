@@ -10,7 +10,7 @@ namespace listClassFromScratch
     /// List methods created by using ony arrays.
     /// String, int and double types are usable. Operation will be done on strings.
     /// </summary>
-    internal class listClass
+    public class listClass
     {        
         //Array
         /// <summary>
@@ -29,7 +29,7 @@ namespace listClassFromScratch
         /// </summary>
         /// <param name="array"></param>
         /// <returns>string array</returns>
-        private string[] removeDuplets(string[] array)
+        public string[] removeDuplets(string[] array)
         {
             Guid uuid = Guid.NewGuid();
             string[] checkedArray = createArray(array.Length);
