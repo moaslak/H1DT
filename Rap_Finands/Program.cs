@@ -22,7 +22,7 @@ namespace Rap_Finands
             Console.WriteLine("Henter alt kontodata");
             
             konti = hent(datafil);
-            if (konti.Count == 0) {
+            /*if (konti.Count == 0) {
                 var k = lavKonto();
                 k.ejer = "Ejvind Møller";
                 konti.Add(k);
@@ -33,24 +33,31 @@ namespace Rap_Finands
                 
                 gem();
             } else {
-            }
+            }*/ // data findes fra json. INGEN HARDCODED DATA.
             dos_start();
             
         }
         static void dos_start() {
             Console.WriteLine("Velkommen til Rap Finans af Konrad Sommer");
             Console.WriteLine("Hvad vil du gøre nu?");
-            
+
+            int valg;
             bool blivVedogved = true;
             while (blivVedogved) {
-                Console.WriteLine("1. Opret ny konto");
-                Console.WriteLine("2. Hæv/sæt ind");
-                Console.WriteLine("3. Se en oversigt");
-                Console.WriteLine("0. Afslut");
+                
+                // do while, for at undgå forkert bruger input.
+                do
+                {
+                    Console.WriteLine("1. Opret ny konto");
+                    Console.WriteLine("2. Hæv/sæt ind");
+                    Console.WriteLine("3. Se en oversigt");
+                    Console.WriteLine("0. Afslut");
+                    Console.Write(">");
 
-                Console.Write(">");
-                string valg1 = Console.ReadLine();
-                int valg = int.Parse(valg1); // +1 gør at man ikke vælger rigtigt i menuen
+                } while (!(Int32.TryParse(Console.ReadLine(),out valg)));
+                
+                //string valg1 = Console.ReadLine();
+               // int valg = int.Parse(valg1); // +1 gør at man ikke vælger rigtigt i menuen
                 
                 switch (valg) {
                     case 1:
@@ -69,7 +76,6 @@ namespace Rap_Finands
                         Console.WriteLine("UGYLDIGT VALGT!!");
                         //Console.ReadKey(); // kan gøre at man vælger igen. Der er ingen, umiddelbar, grund til at holde en pause her
                         break;
-
                 }
             }
             Console.Clear();

@@ -89,14 +89,14 @@
     },
     {
         "registreringsnr": "4242",
-        "kontonr": "6601 641 001",
+        "kontonr": "1650 870 612",
         "ejer": "john",
         "transaktioner": [
             {
-                "tekst": "hest",
-                "saldo": 1337.0,
-                "amount": 1337.0,
-                "dato": "2022-03-15T09:05:34.9495788+01:00"
+                "tekst": "jnæ",
+                "saldo": 1235.0,
+                "amount": 1235.0,
+                "dato": "2022-03-15T09:28:22.5930924+01:00"
             }
         ]
     }
