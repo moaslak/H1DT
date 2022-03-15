@@ -49,7 +49,7 @@ namespace Rap_Finands
 
                 Console.Write(">");
                 string valg1 = Console.ReadLine();
-                int valg = int.Parse(valg1);
+                int valg = int.Parse(valg1+1);
                 
                 switch (valg) {
                     case 1:
@@ -152,7 +152,7 @@ namespace Rap_Finands
             if (saldo + beløb < 0) return false;
             var t = new Transaktion();
             t.tekst = tekst;
-            t.amount = beløb;
+            t.amount = belob;
             t.saldo = t.amount + saldo;
             t.dato = DateTime.Now;
             
