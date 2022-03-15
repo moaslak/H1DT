@@ -20,7 +20,7 @@ namespace Rap_Finands
         {
             Console.WriteLine("Henter alt kontodata");
             
-            hent();
+            konti = hent();
             if (konti.Count == 0) {
                 var k = lavKonto();
                 k.ejer = "Ejvind Møller";
@@ -174,17 +174,20 @@ namespace Rap_Finands
         public static void gem() 
         {
             File.WriteAllText(datafil,JsonConvert.SerializeObject(konti));
+
             File.Delete(datafil); //Fjern debug fil
         }
-        public static void hent()
+        public static List<Konto> hent()
         {
-            datafil = "debug_bank.json"; //Debug - brug en anden datafil til debug ~Konrad
+            // korret sti til json
+            datafil = "C:/Dropbox/TECHCOLLEGE/Hovedforløb_1/Repository/H1DT/Rap_Finands/bank.json"; //Debug - brug en anden datafil til debug ~Konrad
             if (File.Exists(datafil)) {
                 string json = File.ReadAllText(datafil);
                 konti = JsonConvert.DeserializeObject<List<Konto>>(json);
             } else {
                 konti = new List<Konto>();
             }
+            return konti;
         }
     }
 }
