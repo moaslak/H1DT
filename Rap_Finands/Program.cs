@@ -49,7 +49,7 @@ namespace Rap_Finands
 
                 Console.Write(">");
                 string valg1 = Console.ReadLine();
-                int valg = int.Parse(valg1+1);
+                int valg = int.Parse(valg1); // +1 gør at man ikke vælger rigtigt i menuen
                 
                 switch (valg) {
                     case 1:
