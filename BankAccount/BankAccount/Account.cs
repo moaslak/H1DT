@@ -8,9 +8,15 @@ namespace BankAccount
 {
     public class Account
     {
-        
         private double balance;
-        uint accountNumber;
+        uint accountNumber { get; set; }
+
+        private bool accessGranted(int pin, uint accountNumber)
+        {
+            bool access = false;
+
+            return access;
+        }
 
         public double getBalance()
         {
@@ -18,7 +24,7 @@ namespace BankAccount
             printBalance.printBalance(balance);
             return this.balance;
         }
-
+        
         public void withdraw(double withdraw)
         {
             double subWithdraw = this.balance - withdraw;
